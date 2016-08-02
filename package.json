@@ -1,0 +1,38 @@
+{
+  "name": "promised-observable",
+  "version": "0.0.0",
+  "description": "Create an observable from a promise that will resolve to an observable",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul cover _mocha ./test && istanbul --text check-coverage --statements 100 --functions 100 --branches 100 --lines 100",
+    "test-watch": "nodemon -x mocha ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tjmehta/promised-observable.git"
+  },
+  "keywords": [
+    "observable",
+    "promise",
+    "deferred",
+    "wrap"
+  ],
+  "author": "Tejesh Mehta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tjmehta/promised-observable/issues"
+  },
+  "homepage": "https://github.com/tjmehta/promised-observable#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.0",
+    "rxjs": "^5.0.0-beta.10",
+    "sinon": "^1.17.5"
+  },
+  "peerDependencies": {
+    "rxjs": "^5.0.0-beta.10"
+  },
+  "dependencies": {
+    "istanbul": "^0.4.4"
+  }
+}
