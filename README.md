@@ -54,5 +54,21 @@ observable.subscribe(
 // onError: [Error: 'boom']
 ```
 
+Promise does not resolve observable error
+```js
+var PromisedObservable = require('promised-observable')
+
+var nonObservable = {}
+var promise = Promise.resolve(nonObservable)
+
+var observable = new PromisedObservable(promise)
+observable.subscribe(
+  log('onNext:')
+  log('onError:')
+  log('onCompleted:')
+)
+// onError: [Error: 'promise did not resolve to an observable']
+```
+
 # License
 MIT
