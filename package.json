@@ -1,6 +1,6 @@
 {
   "name": "promised-observable",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Create an observable from a promise that will resolve to an observable",
   "main": "index.js",
   "scripts": {
