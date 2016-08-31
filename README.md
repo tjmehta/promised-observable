@@ -1,4 +1,4 @@
-# promised-observable
+# promised-observable [![Build Status](https://travis-ci.org/tjmehta/promised-observable.svg?branch=master)](https://travis-ci.org/tjmehta/promised-observable) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 Create an observable from a promise that will resolve to an observable.
 
 # Installation
