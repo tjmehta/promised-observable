@@ -136,9 +136,10 @@ describe('promised-observable', function () {
   describe('unsubscribe', function () {
     it('should unsubscribe source if it exists', function (done) {
       var innerUnsubscribe = sinon.stub()
-      var innerObservable = new Observable(function (observer) {
+      var innerSubscribe = sinon.spy(function (observer) {
         return new Subscription(innerUnsubscribe)
       })
+      var innerObservable = new Observable(innerSubscribe)
       var mockPromise = {
         then: function (cb) {
           cb(innerObservable)
@@ -154,7 +155,44 @@ describe('promised-observable', function () {
       )
       this.subscription.unsubscribe()
       delete this.subscription
+      sinon.assert.calledOnce(innerSubscribe)
       sinon.assert.calledOnce(innerUnsubscribe)
+      done()
+    })
+
+    it('should unsubscribe source if it exists TWICE', function (done) {
+      var innerUnsubscribe = sinon.stub()
+      var innerSubscribe = sinon.spy(function (observer) {
+        return new Subscription(innerUnsubscribe)
+      })
+      var innerObservable = new Observable(innerSubscribe)
+      var mockPromise = {
+        then: function (cb) {
+          cb(innerObservable)
+          return this
+        },
+        catch: noop
+      }
+      var observable = new PromisedObservable(mockPromise)
+      this.subscription = observable.subscribe(
+        expectNotCalled('onNext', done),
+        expectNotCalled('onError', done),
+        expectNotCalled('onCompleted', done)
+      )
+      this.subscription.unsubscribe()
+      delete this.subscription
+      sinon.assert.calledOnce(innerSubscribe)
+      sinon.assert.calledOnce(innerUnsubscribe)
+      // TWICE
+      this.subscription = observable.subscribe(
+        expectNotCalled('onNext', done),
+        expectNotCalled('onError', done),
+        expectNotCalled('onCompleted', done)
+      )
+      this.subscription.unsubscribe()
+      delete this.subscription
+      sinon.assert.calledTwice(innerSubscribe)
+      sinon.assert.calledTwice(innerUnsubscribe)
       done()
     })
 
